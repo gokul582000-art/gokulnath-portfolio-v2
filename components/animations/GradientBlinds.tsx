@@ -37,13 +37,18 @@ export default function GradientBlinds({
   distortAmount = 0,
   shineDirection = 'left',
   mixBlendMode = 'lighten'
-}: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+}: any) {
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
-  const programRef = useRef<any /* eslint-disable-line @typescript-eslint/no-explicit-any */>(null);
-  const meshRef = useRef<any /* eslint-disable-line @typescript-eslint/no-explicit-any */>(null);
-  const geometryRef = useRef<any /* eslint-disable-line @typescript-eslint/no-explicit-any */>(null);
-  const rendererRef = useRef<any /* eslint-disable-line @typescript-eslint/no-explicit-any */>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const programRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const meshRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const geometryRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rendererRef = useRef<any>(null);
   const mouseTargetRef = useRef([0, 0]);
   const lastTimeRef = useRef(0);
   const firstResizeRef = useRef(true);
@@ -308,7 +313,8 @@ void main() {
       if (canvas.parentElement === container) {
         container.removeChild(canvas);
       }
-      const callIfFn = (obj: any /* eslint-disable-line @typescript-eslint/no-explicit-any */, key: string) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const callIfFn = (obj: any, key: string) => {
         if (obj && typeof obj[key] === 'function') {
           obj[key].call(obj);
         }
