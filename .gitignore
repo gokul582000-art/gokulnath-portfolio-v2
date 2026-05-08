@@ -34,3 +34,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Ignore large videos
+public/assets/design/AI Projects/A2b-thali-box-AI-ad.mp4
+public/assets/design/AI Projects/SALEM-RR-1-.mp4
+public/assets/design/AI Projects/Thangamayil-ad.mp4
+public/assets/design/GRUNDFOS/EHS-_2-(26.02.2026)-F2_1.mp4
+public/assets/design/GRUNDFOS/Grundfos-80th-Anniversary---High-Res_1.mp4
+public/assets/design/HOTMALE/OUT-1.mp4

@@ -1,27 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+  :root {
+    --font-cursive: 'Sacramento', cursive;
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #080808;
+  --foreground: #ffffff;
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(201, 168, 76, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .glass-hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(201, 168, 76, 0.3);
+    transform: translateY(-8px);
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(201, 168, 76, 0.2);
+  }
+
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #c9a84c 0%, #a07830 50%, #6b4f1a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-24 lg:py-32;
+  }
+
+  .container-custom {
+    @apply max-w-[1400px] mx-auto px-5 md:px-8 lg:px-16;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a07830;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a84c;
 }
