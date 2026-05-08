@@ -74,8 +74,8 @@ export default function PhotographyProjectPage() {
                       <p className="font-ui text-sm text-white">{project.year}</p>
                     </div>
                     <div>
-                      <p className="font-mono text-[10px] text-gold-light uppercase tracking-widest mb-1">Photos</p>
-                      <p className="font-ui text-sm text-white">{project.media.length} images</p>
+                      <p className="font-mono text-[10px] text-gold-light uppercase tracking-widest mb-1">Media</p>
+                      <p className="font-ui text-sm text-white">{project.media.length} items</p>
                     </div>
                   </div>
                 </ScrollReveal>

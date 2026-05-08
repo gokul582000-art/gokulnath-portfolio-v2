@@ -41,16 +41,26 @@ export function CustomCursor() {
         !!el.closest("button") ||
         el.classList.contains("cursor-pointer");
 
+      const isInput = el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable;
+
       if (interactive) {
         outer.style.width = "60px";
         outer.style.height = "60px";
         outer.style.borderColor = "rgba(201,168,76,0.3)";
         outer.style.backgroundColor = "rgba(201,168,76,0.12)";
+        outer.style.borderRadius = "50%";
+      } else if (isInput) {
+        outer.style.width = "2px";
+        outer.style.height = "24px";
+        outer.style.borderColor = "#C9A84C";
+        outer.style.backgroundColor = "#C9A84C";
+        outer.style.borderRadius = "1px";
       } else {
         outer.style.width = "40px";
         outer.style.height = "40px";
         outer.style.borderColor = "rgba(201,168,76,0.5)";
         outer.style.backgroundColor = "transparent";
+        outer.style.borderRadius = "50%";
       }
     };
 

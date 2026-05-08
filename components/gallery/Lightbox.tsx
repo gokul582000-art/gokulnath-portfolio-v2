@@ -124,6 +124,37 @@ export function Lightbox({ media, currentIndex, onClose, onNavigate }: LightboxP
           />
         )}
       </div>
+
+      {/* Thumbnail Strip */}
+      <div className="absolute bottom-0 left-0 right-0 z-50 p-4 bg-gradient-to-t from-black/80 to-transparent">
+        <div className="flex gap-2 max-w-5xl mx-auto overflow-x-auto pb-2 scrollbar-hide items-center justify-center sm:justify-start lg:justify-center">
+          {media.map((m, idx) => {
+            const isVideo = m.type === "video";
+            return (
+              <button
+                key={idx}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsLoaded(false);
+                  onNavigate(idx);
+                }}
+                className={`relative w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-md overflow-hidden transition-all duration-300 ${
+                  currentIndex === idx
+                    ? "ring-2 ring-gold-light opacity-100 scale-105"
+                    : "opacity-40 hover:opacity-100"
+                }`}
+              >
+                {isVideo ? (
+                  <video src={m.src} className="w-full h-full object-cover pointer-events-none" preload="metadata" />
+                ) : (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={m.src} alt="" loading="lazy" className="w-full h-full object-cover pointer-events-none" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,8 @@
 "use client";
 
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { GSAPProvider } from "@/components/animations/GSAPProvider";
@@ -16,6 +19,26 @@ const stats = [
 ];
 
 export default function AboutPage() {
+  const portraitRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (!portraitRef.current) return;
+    
+    gsap.fromTo(portraitRef.current, 
+      { y: "-10%", scale: 1.1 },
+      {
+        y: "10%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: portraitRef.current.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      }
+    );
+  }, []);
+
   return (
     <GSAPProvider>
       <div className="min-h-screen bg-bg-primary">
@@ -87,9 +110,10 @@ export default function AboutPage() {
                   <div className="relative aspect-[4/5] overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
+                      ref={portraitRef}
                       src="/assets/about/profile.png" 
                       alt="Gokulnath" 
-                      className="absolute inset-0 w-full h-full object-cover object-top"
+                      className="absolute inset-0 w-full h-full object-cover object-top will-change-transform"
                     />
                     {/* Black fade at the bottom */}
                     <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-bg-primary via-bg-primary/60 to-transparent" />
