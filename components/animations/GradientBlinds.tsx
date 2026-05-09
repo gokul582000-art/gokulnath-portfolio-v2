@@ -37,18 +37,30 @@ export default function GradientBlinds({
   distortAmount = 0,
   shineDirection = 'left',
   mixBlendMode = 'lighten'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-}: any) {
+}: {
+  className?: string;
+  dpr?: number;
+  paused?: boolean;
+  gradientColors?: string[];
+  angle?: number;
+  noise?: number;
+  blindCount?: number;
+  blindMinWidth?: number;
+  mouseDampening?: number;
+  mirrorGradient?: boolean;
+  spotlightRadius?: number;
+  spotlightSoftness?: number;
+  spotlightOpacity?: number;
+  distortAmount?: number;
+  shineDirection?: string;
+  mixBlendMode?: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const programRef = useRef<any>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const meshRef = useRef<any>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const geometryRef = useRef<any>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const rendererRef = useRef<any>(null);
+  const programRef = useRef<unknown>(null);
+  const meshRef = useRef<unknown>(null);
+  const geometryRef = useRef<unknown>(null);
+  const rendererRef = useRef<unknown>(null);
   const mouseTargetRef = useRef([0, 0]);
   const lastTimeRef = useRef(0);
   const firstResizeRef = useRef(true);
@@ -313,10 +325,9 @@ void main() {
       if (canvas.parentElement === container) {
         container.removeChild(canvas);
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const callIfFn = (obj: any, key: string) => {
-        if (obj && typeof obj[key] === 'function') {
-          obj[key].call(obj);
+      const callIfFn = (obj: unknown, key: string) => {
+        if (obj && typeof (obj as Record<string, unknown>)[key] === 'function') {
+          ((obj as Record<string, unknown>)[key] as () => void).call(obj);
         }
       };
       callIfFn(programRef.current, 'remove');
