@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Renderer, Program, Mesh, Triangle } from 'ogl';
+import { Renderer, Program, Mesh, Triangle, Transform } from 'ogl';
 import './GradientBlinds.css';
 
 const MAX_COLORS = 8;
@@ -57,10 +57,10 @@ export default function GradientBlinds({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
-  const programRef = useRef<unknown>(null);
-  const meshRef = useRef<unknown>(null);
-  const geometryRef = useRef<unknown>(null);
-  const rendererRef = useRef<unknown>(null);
+  const programRef = useRef<Program | null>(null);
+  const meshRef = useRef<Mesh | null>(null);
+  const geometryRef = useRef<Triangle | null>(null);
+  const rendererRef = useRef<Renderer | null>(null);
   const mouseTargetRef = useRef([0, 0]);
   const lastTimeRef = useRef(0);
   const firstResizeRef = useRef(true);
@@ -309,7 +309,7 @@ void main() {
       }
       if (!paused && isVisible && programRef.current && meshRef.current) {
         try {
-          renderer.render({ scene: meshRef.current });
+          renderer.render({ scene: meshRef.current as unknown as Transform });
         } catch (e) {
           console.error(e);
         }
