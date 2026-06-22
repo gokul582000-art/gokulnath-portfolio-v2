@@ -18,17 +18,37 @@ interface ProjectGridProps {
   maxInitialItems?: number;
 }
 
-function ThumbnailMedia({ src, title }: { src: string; title: string }) {
+function ThumbnailMedia({ src, title, priority }: { src: string; title: string; priority?: boolean }) {
   const isVideo = /\.(mp4|mov|webm)$/i.test(src);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!isVideo || !videoRef.current) return;
+    
+    const video = videoRef.current;
+    const parent = video.closest('[data-card]');
+    if (!parent) return;
+
+    const play = () => video.play().catch(() => {});
+    const pause = () => video.pause();
+
+    parent.addEventListener('mouseenter', play);
+    parent.addEventListener('mouseleave', pause);
+
+    return () => {
+      parent.removeEventListener('mouseenter', play);
+      parent.removeEventListener('mouseleave', pause);
+    };
+  }, [isVideo]);
 
   if (isVideo) {
     return (
       <video
+        ref={videoRef}
         src={src}
         muted
         loop
         playsInline
-        autoPlay
         preload="metadata"
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
@@ -40,6 +60,7 @@ function ThumbnailMedia({ src, title }: { src: string; title: string }) {
       src={src}
       alt={title}
       fill
+      priority={priority}
       className="object-cover transition-transform duration-500 group-hover:scale-105"
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
     />
@@ -69,7 +90,7 @@ export function ProjectGrid({ projects, basePath, maxInitialItems }: ProjectGrid
   return (
     <div className="flex flex-col items-center">
       <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 w-full">
-        {displayedProjects.map((project) => (
+        {displayedProjects.map((project, i) => (
         <Link
           key={project.slug}
           href={`${basePath}/${project.slug}`}
@@ -78,7 +99,7 @@ export function ProjectGrid({ projects, basePath, maxInitialItems }: ProjectGrid
         >
           {/* Thumbnail container — 4:5 ratio */}
           <div className="relative w-full aspect-[4/5] shrink-0 overflow-hidden rounded-2xl glass hover:glass-hover transition-all duration-300">
-            <ThumbnailMedia src={project.thumbnail} title={project.title} />
+            <ThumbnailMedia src={project.thumbnail} title={project.title} priority={i < 2} />
 
             {/* Hover overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/90 via-bg-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 md:p-6">
