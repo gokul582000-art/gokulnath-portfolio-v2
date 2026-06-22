@@ -44,7 +44,12 @@ export default function PhotographyPage() {
                   photography that captures authentic moments and emotions.
                 </p>
               </ScrollReveal>
-              <ProjectGrid projects={photographyProjects} basePath="/photography" maxInitialItems={6} />
+              <ProjectGrid 
+                projects={photographyProjects} 
+                basePath="/photography" 
+                maxInitialItems={6} 
+                gridCols={{ base: 1, sm: 2, lg: 3 }} 
+              />
             </div>
             <ScrollFade position="bottom" height="10rem" />
           </section>

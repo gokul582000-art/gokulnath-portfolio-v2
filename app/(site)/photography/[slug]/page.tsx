@@ -89,7 +89,7 @@ export default function PhotographyProjectPage() {
             </section>
 
             <section className="pb-16 md:pb-24">
-              <div className="container-custom max-w-[960px]">
+              <div className="container-custom">
                 <MediaGallery media={project.media} />
               </div>
             </section>
