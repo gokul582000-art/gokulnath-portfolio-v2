@@ -94,7 +94,7 @@ export default function DesignProjectPage() {
             {/* Media Gallery */}
             <section className="pb-16 md:pb-24">
               <div className="container-custom">
-                <MediaGallery media={project.media} />
+                <MediaGallery media={project.media} layout={project.slug === 'grundfos' ? 'single' : 'default'} />
               </div>
             </section>
 

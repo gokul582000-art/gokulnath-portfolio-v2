@@ -65,7 +65,7 @@ export default function RootLayout({
       lang="en"
       className={`${bebasNeue.variable} ${dmSerif.variable} ${syne.variable} ${instrumentSans.variable} ${dmMono.variable} ${sacramento.variable}`}
     >
-      <body className="bg-bg-primary text-text-primary antialiased min-h-screen pb-24 md:pb-0">
+      <body className="bg-bg-primary text-text-primary antialiased min-h-screen">
         <CustomCursor />
         {children}
       </body>

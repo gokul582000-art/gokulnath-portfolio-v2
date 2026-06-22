@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Lightbox } from "./Lightbox";
+import clsx from "clsx";
 
 interface MediaItem {
   src: string;
@@ -11,6 +12,7 @@ interface MediaItem {
 
 interface MediaGalleryProps {
   media: MediaItem[];
+  layout?: "default" | "single";
 }
 
 function MediaCard({ item, onClick }: { item: MediaItem; onClick: () => void }) {
@@ -84,14 +86,20 @@ function MediaCard({ item, onClick }: { item: MediaItem; onClick: () => void }) 
   );
 }
 
-export function MediaGallery({ media }: MediaGalleryProps) {
+export function MediaGallery({ media, layout = "default" }: MediaGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
     <>
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6 w-full">
+      <div className={clsx(
+        "w-full",
+        layout === "single" ? "flex flex-col gap-8 md:gap-12 max-w-5xl mx-auto" : "columns-2 md:columns-3 gap-4 md:gap-6"
+      )}>
         {media.map((item, i) => (
-          <div key={`${item.src}-${i}`} className="break-inside-avoid mb-4 md:mb-6 inline-block w-full">
+          <div key={`${item.src}-${i}`} className={clsx(
+            "break-inside-avoid inline-block w-full",
+            layout === "single" ? "" : "mb-4 md:mb-6"
+          )}>
             <MediaCard
               item={item}
               onClick={() => setLightboxIndex(i)}
