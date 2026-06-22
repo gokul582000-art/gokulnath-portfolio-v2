@@ -48,7 +48,6 @@ export default function PhotographyPage() {
                 projects={photographyProjects} 
                 basePath="/photography" 
                 maxInitialItems={6} 
-                gridCols={{ base: 1, sm: 2, lg: 3 }} 
               />
             </div>
             <ScrollFade position="bottom" height="10rem" />
