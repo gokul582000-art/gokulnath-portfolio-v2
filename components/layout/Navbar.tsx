@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import ShinyText from "@/components/animations/ShinyText";
 import clsx from "clsx";
-import { Menu, X } from "lucide-react";
+import { Camera, Palette, User, MessageSquare } from "lucide-react";
 
 const navLinks = [
   { label: "Design", href: "/design" },
@@ -13,10 +13,16 @@ const navLinks = [
   { label: "About", href: "/about" },
 ];
 
+const mobileNavLinks = [
+  { label: "Design", href: "/design", icon: Palette },
+  { label: "Photo", href: "/photography", icon: Camera },
+  { label: "About", href: "/about", icon: User },
+  { label: "Contact", href: "/contact", icon: MessageSquare },
+];
+
 export function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,42 +90,31 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden p-2 text-gold-light hover:text-white transition-colors"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
       </nav>
 
-      {/* Mobile Menu Dropdown */}
-      <div
-        className={clsx(
-          "absolute top-full left-4 right-4 mt-2 p-4 rounded-2xl bg-bg-secondary/95 backdrop-blur-xl border border-glass-border shadow-glass-hover transition-all duration-300 flex flex-col space-y-2 origin-top md:hidden",
-          mobileMenuOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 pointer-events-none"
-        )}
-      >
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            onClick={() => setMobileMenuOpen(false)}
-            className="px-4 py-3 rounded-xl font-ui text-base text-text-secondary hover:text-white hover:bg-glass-bg transition-colors"
-          >
-            {link.label}
-          </Link>
-        ))}
-        <div className="pt-2 mt-2 border-t border-glass-border">
-          <Link
-            href="/contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center justify-center w-full px-4 py-3 rounded-xl font-ui text-base font-medium bg-gold-light/10 text-gold-light hover:bg-gold-light hover:text-bg-primary transition-colors"
-          >
-            Let&apos;s Talk
-          </Link>
-        </div>
+      {/* Mobile Bottom Tab Bar */}
+      <div className="md:hidden fixed bottom-4 left-4 right-4 z-50">
+        <nav className="flex items-center justify-around w-full px-2 py-3 rounded-2xl bg-bg-primary/90 backdrop-blur-xl border border-glass-border shadow-glass-hover">
+          {mobileNavLinks.map((link) => {
+            const isActive = pathname === link.href || pathname?.startsWith(`${link.href}/`);
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={clsx(
+                  "flex flex-col items-center justify-center space-y-1 transition-all duration-300",
+                  isActive ? "text-gold-light" : "text-text-secondary hover:text-white"
+                )}
+              >
+                <div className={clsx("p-1.5 rounded-full transition-all duration-300", isActive ? "bg-gold-light/10" : "")}>
+                  <Icon size={20} className={isActive ? "drop-shadow-[0_0_8px_rgba(201,168,76,0.5)]" : ""} />
+                </div>
+                <span className="text-[10px] font-ui tracking-wider uppercase">{link.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </header>
   );
