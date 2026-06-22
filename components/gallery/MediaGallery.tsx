@@ -93,12 +93,14 @@ export function MediaGallery({ media, layout = "default" }: MediaGalleryProps) {
     <>
       <div className={clsx(
         "w-full",
-        layout === "single" ? "flex flex-col gap-8 md:gap-12 max-w-5xl mx-auto" : "columns-2 md:columns-3 gap-4 md:gap-6"
+        layout === "single" 
+          ? "flex flex-col gap-8 md:gap-12 max-w-5xl mx-auto" 
+          : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
       )}>
         {media.map((item, i) => (
           <div key={`${item.src}-${i}`} className={clsx(
-            "break-inside-avoid inline-block w-full",
-            layout === "single" ? "" : "mb-4 md:mb-6"
+            "w-full",
+            layout === "single" ? "" : ""
           )}>
             <MediaCard
               item={item}
