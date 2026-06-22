@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useCallback, useState } from "react";
+import Image from "next/image";
 
 interface MediaItem {
   src: string;
@@ -101,8 +102,7 @@ export function Lightbox({ media, currentIndex, onClose, onNavigate }: LightboxP
 
       {/* Media */}
       <div
-        className="relative z-10 max-w-[92vw] max-h-[90vh] flex items-center justify-center"
-        onClick={(e) => e.stopPropagation()}
+        className="relative z-10 w-full px-4 md:px-[5%] h-[100vh] pt-[80px] pb-[120px] flex items-center justify-center pointer-events-none"
       >
         {item.type === "video" ? (
           <video
@@ -111,17 +111,22 @@ export function Lightbox({ media, currentIndex, onClose, onNavigate }: LightboxP
             controls
             autoPlay
             playsInline
-            className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            className="max-w-full max-h-full object-contain rounded-lg pointer-events-auto shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           />
         ) : (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            key={item.src}
-            src={item.src}
-            alt=""
-            onLoad={() => setIsLoaded(true)}
-            className={`max-w-full max-h-[90vh] object-contain rounded-lg transition-opacity duration-300 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-          />
+          <div className="relative w-full h-full pointer-events-auto" onClick={(e) => e.stopPropagation()}>
+            <Image
+              key={item.src}
+              src={item.src}
+              alt=""
+              fill
+              sizes="92vw"
+              unoptimized={item.type === "gif"}
+              onLoad={() => setIsLoaded(true)}
+              className={`object-contain rounded-lg transition-opacity duration-300 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            />
+          </div>
         )}
       </div>
 
@@ -147,8 +152,7 @@ export function Lightbox({ media, currentIndex, onClose, onNavigate }: LightboxP
                 {isVideo ? (
                   <video src={m.src} className="w-full h-full object-cover pointer-events-none" preload="metadata" />
                 ) : (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img src={m.src} alt="" loading="lazy" className="w-full h-full object-cover pointer-events-none" />
+                  <Image src={m.src} alt="" fill sizes="(max-width: 768px) 48px, 64px" unoptimized={m.type === "gif"} className="object-cover pointer-events-none" />
                 )}
               </button>
             );

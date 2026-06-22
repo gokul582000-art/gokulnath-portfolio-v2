@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { Lightbox } from "./Lightbox";
 
 interface MediaItem {
@@ -68,12 +69,15 @@ function MediaCard({ item, onClick }: { item: MediaItem; onClick: () => void }) 
       className="relative w-full cursor-pointer group"
       onClick={onClick}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={item.src}
         alt=""
-        loading="lazy"
-        className="w-full h-auto rounded-lg transition-transform duration-300 group-hover:scale-[1.01]"
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: '100%', height: 'auto' }}
+        className="rounded-lg transition-transform duration-300 group-hover:scale-[1.01]"
+        unoptimized={item.type === 'gif'}
       />
       <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
     </div>

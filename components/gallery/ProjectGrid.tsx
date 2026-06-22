@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 
 interface ProjectCardData {
@@ -35,12 +36,12 @@ function ThumbnailMedia({ src, title }: { src: string; title: string }) {
   }
 
   return (
-    /* eslint-disable-next-line @next/next/no-img-element */
-    <img
+    <Image
       src={src}
       alt={title}
-      loading="lazy"
-      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      fill
+      className="object-cover transition-transform duration-500 group-hover:scale-105"
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
     />
   );
 }

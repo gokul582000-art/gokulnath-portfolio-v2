@@ -8,7 +8,6 @@ import ShinyText from "@/components/animations/ShinyText";
 import ScrollFade from "@/components/animations/ScrollFade";
 import { ProjectGrid } from "@/components/gallery/ProjectGrid";
 import { photographyProjects } from "@/lib/data/photography-projects";
-
 export default function PhotographyPage() {
   return (
     <GSAPProvider>

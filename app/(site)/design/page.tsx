@@ -8,7 +8,6 @@ import ShinyText from "@/components/animations/ShinyText";
 import ScrollFade from "@/components/animations/ScrollFade";
 import { ProjectGrid } from "@/components/gallery/ProjectGrid";
 import { designProjects } from "@/lib/data/design-projects";
-
 export default function DesignPage() {
   return (
     <GSAPProvider>

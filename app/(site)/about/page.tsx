@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
+import Image from "next/image";
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -108,12 +109,14 @@ export default function AboutPage() {
 
                 <ScrollReveal delay={0.2}>
                   <div className="relative aspect-[4/5] overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img 
+                    <Image 
                       ref={portraitRef}
                       src="/assets/about/profile.png" 
                       alt="Gokulnath" 
-                      className="absolute inset-0 w-full h-full object-cover object-top will-change-transform"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
+                      className="object-cover object-top will-change-transform"
                     />
                     {/* Black fade at the bottom */}
                     <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-bg-primary via-bg-primary/60 to-transparent" />

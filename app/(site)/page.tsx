@@ -7,7 +7,11 @@ import { GSAPProvider } from "@/components/animations/GSAPProvider";
 import { Preloader } from "@/components/animations/Preloader";
 import { HeroSection, PortfolioEntry } from "@/components/sections/HeroSection";
 import { AboutSnapshot } from "@/components/sections/AboutSnapshot";
-import DomeGallery from "@/components/animations/DomeGallery";
+import dynamic from "next/dynamic";
+
+const DomeGallery = dynamic(() => import("@/components/animations/DomeGallery"), {
+  ssr: false,
+});
 import { ClientsStrip } from "@/components/sections/ClientsStrip";
 import { CTASection } from "@/components/sections/CTASection";
 
