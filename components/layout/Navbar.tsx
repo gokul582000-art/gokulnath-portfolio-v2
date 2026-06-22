@@ -5,19 +5,10 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import ShinyText from "@/components/animations/ShinyText";
 import clsx from "clsx";
-import { Camera, Palette, User, MessageSquare } from "lucide-react";
-
 const navLinks = [
   { label: "Design", href: "/design" },
   { label: "Photography", href: "/photography" },
   { label: "About", href: "/about" },
-];
-
-const mobileNavLinks = [
-  { label: "Design", href: "/design", icon: Palette },
-  { label: "Photo", href: "/photography", icon: Camera },
-  { label: "About", href: "/about", icon: User },
-  { label: "Contact", href: "/contact", icon: MessageSquare },
 ];
 
 export function Navbar() {
