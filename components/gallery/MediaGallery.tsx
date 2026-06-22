@@ -89,13 +89,14 @@ export function MediaGallery({ media }: MediaGalleryProps) {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6 w-full">
         {media.map((item, i) => (
-          <MediaCard
-            key={`${item.src}-${i}`}
-            item={item}
-            onClick={() => setLightboxIndex(i)}
-          />
+          <div key={`${item.src}-${i}`} className="break-inside-avoid mb-4 md:mb-6 inline-block w-full">
+            <MediaCard
+              item={item}
+              onClick={() => setLightboxIndex(i)}
+            />
+          </div>
         ))}
       </div>
 
