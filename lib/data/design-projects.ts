@@ -75,9 +75,9 @@ export const designProjects: DesignProject[] = [
       { src: "/assets/design/DUGGAR/Screenshot-2026-04-02-at-5.25.39-PM.jpg", type: "image" },
       { src: "/assets/design/HARMONY HOMES/Screenshot-2026-04-02-at-5.26.25-PM.jpg", type: "image" },
       { src: "/assets/design/HARMONY HOMES/Screenshot-2026-04-02-at-5.26.33-PM.jpg", type: "image" },
+      { src: "/assets/design/DUGGAR/Screenshot-2026-04-02-at-5.25.02-PM.jpg", type: "image" },
       { src: "/assets/design/HARMONY HOMES/Screenshot-2026-04-02-at-5.25.52-PM.jpg", type: "image" },
       { src: "/assets/design/HARMONY HOMES/Screenshot-2026-04-02-at-5.25.58-PM.jpg", type: "image" },
-      { src: "/assets/design/DUGGAR/Screenshot-2026-04-02-at-5.25.02-PM.jpg", type: "image" },
     ],
   },
   {
