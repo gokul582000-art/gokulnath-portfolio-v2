@@ -12,7 +12,7 @@ interface MediaItem {
 
 interface MediaGalleryProps {
   media: MediaItem[];
-  layout?: "default" | "single" | "hotmale";
+  layout?: "default" | "single" | "hotmale" | "masonry";
 }
 
 function MediaCard({ item, onClick }: { item: MediaItem; onClick: () => void }) {
@@ -97,6 +97,8 @@ export function MediaGallery({ media, layout = "default" }: MediaGalleryProps) {
           ? "flex flex-col gap-8 md:gap-12 max-w-5xl mx-auto" 
           : layout === "hotmale"
           ? "grid grid-cols-1 sm:grid-cols-6 gap-4 md:gap-6"
+          : layout === "masonry"
+          ? "columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6"
           : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
       )}>
         {media.map((item, i) => {
@@ -114,7 +116,8 @@ export function MediaGallery({ media, layout = "default" }: MediaGalleryProps) {
           return (
             <div key={`${item.src}-${i}`} className={clsx(
               "w-full",
-              layout === "hotmale" ? itemClass : ""
+              layout === "hotmale" ? itemClass : "",
+              layout === "masonry" ? "break-inside-avoid mb-4 md:mb-6" : ""
             )}>
               <MediaCard
                 item={item}

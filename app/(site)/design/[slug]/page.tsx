@@ -98,7 +98,8 @@ export default function DesignProjectPage() {
                   media={project.media} 
                   layout={
                     project.slug === 'grundfos' ? 'single' : 
-                    project.slug === 'hotmale' ? 'hotmale' : 'default'
+                    project.slug === 'hotmale' ? 'hotmale' :
+                    project.slug === 'ihs' ? 'masonry' : 'default'
                   } 
                 />
               </div>
