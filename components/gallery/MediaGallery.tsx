@@ -12,7 +12,7 @@ interface MediaItem {
 
 interface MediaGalleryProps {
   media: MediaItem[];
-  layout?: "default" | "single";
+  layout?: "default" | "single" | "hotmale";
 }
 
 function MediaCard({ item, onClick }: { item: MediaItem; onClick: () => void }) {
@@ -95,19 +95,34 @@ export function MediaGallery({ media, layout = "default" }: MediaGalleryProps) {
         "w-full",
         layout === "single" 
           ? "flex flex-col gap-8 md:gap-12 max-w-5xl mx-auto" 
+          : layout === "hotmale"
+          ? "grid grid-cols-1 sm:grid-cols-6 gap-4 md:gap-6"
           : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
       )}>
-        {media.map((item, i) => (
-          <div key={`${item.src}-${i}`} className={clsx(
-            "w-full",
-            layout === "single" ? "" : ""
-          )}>
-            <MediaCard
-              item={item}
-              onClick={() => setLightboxIndex(i)}
-            />
-          </div>
-        ))}
+        {media.map((item, i) => {
+          let itemClass = "w-full";
+          if (layout === "hotmale") {
+            if (item.src.includes("OUT-1")) {
+              itemClass = "w-full sm:col-span-3 lg:col-span-3";
+            } else if (item.src.includes("REELS")) {
+              itemClass = "w-full sm:col-span-2 lg:col-span-2";
+            } else {
+              itemClass = "w-full sm:col-span-3 lg:col-span-2";
+            }
+          }
+          
+          return (
+            <div key={`${item.src}-${i}`} className={clsx(
+              "w-full",
+              layout === "hotmale" ? itemClass : ""
+            )}>
+              <MediaCard
+                item={item}
+                onClick={() => setLightboxIndex(i)}
+              />
+            </div>
+          );
+        })}
       </div>
 
       {lightboxIndex !== null && (
