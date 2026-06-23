@@ -97,7 +97,7 @@ export function MediaGallery({ media, layout = "default" }: MediaGalleryProps) {
           ? "flex flex-col gap-8 md:gap-12 max-w-5xl mx-auto" 
           : layout === "hotmale"
           ? "grid grid-cols-1 sm:grid-cols-6 gap-4 md:gap-6"
-          : layout === "masonry"
+          : layout === "masonry" || layout === "default"
           ? "columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6"
           : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
       )}>
@@ -117,7 +117,7 @@ export function MediaGallery({ media, layout = "default" }: MediaGalleryProps) {
             <div key={`${item.src}-${i}`} className={clsx(
               "w-full",
               layout === "hotmale" ? itemClass : "",
-              layout === "masonry" ? "break-inside-avoid mb-4 md:mb-6" : ""
+              (layout === "masonry" || layout === "default") ? "break-inside-avoid mb-4 md:mb-6" : ""
             )}>
               <MediaCard
                 item={item}
