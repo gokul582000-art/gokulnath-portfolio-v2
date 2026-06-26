@@ -33,7 +33,7 @@ export default function DesignPage() {
                   Where raw strategy meets refined execution. Explore a gallery of visual solutions designed to move the needle and define modern brands.
                 </p>
               </ScrollReveal>
-              <ProjectGrid projects={designProjects} basePath="/design" maxInitialItems={6} />
+              <ProjectGrid projects={designProjects} basePath="/design" />
             </div>
             <ScrollFade position="bottom" height="10rem" />
           </section>

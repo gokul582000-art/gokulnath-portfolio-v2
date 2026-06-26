@@ -47,7 +47,6 @@ export default function PhotographyPage() {
               <ProjectGrid 
                 projects={photographyProjects} 
                 basePath="/photography" 
-                maxInitialItems={6} 
               />
             </div>
             <ScrollFade position="bottom" height="10rem" />
