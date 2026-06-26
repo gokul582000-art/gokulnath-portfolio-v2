@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
@@ -69,9 +69,6 @@ function ThumbnailMedia({ src, title, priority }: { src: string; title: string; 
 
 export function ProjectGrid({ projects, basePath, maxInitialItems }: ProjectGridProps) {
   const gridRef = useRef<HTMLDivElement>(null);
-  const [visibleCount, setVisibleCount] = useState(maxInitialItems || projects.length);
-  const displayedProjects = projects.slice(0, visibleCount);
-  const hasMore = visibleCount < projects.length;
 
   useEffect(() => {
     if (!gridRef.current) return;
@@ -90,7 +87,7 @@ export function ProjectGrid({ projects, basePath, maxInitialItems }: ProjectGrid
   return (
     <div className="flex flex-col items-center">
       <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 w-full">
-        {displayedProjects.map((project, i) => (
+        {projects.map((project, i) => (
         <Link
           key={project.slug}
           href={`${basePath}/${project.slug}`}
@@ -123,16 +120,7 @@ export function ProjectGrid({ projects, basePath, maxInitialItems }: ProjectGrid
       ))}
       </div>
       
-      {hasMore && (
-        <div className="mt-12 flex justify-center w-full">
-          <button
-            onClick={() => setVisibleCount((prev: number) => prev + 6)}
-            className="px-8 py-3 rounded-full border border-white/10 hover:border-gold-light text-sm font-ui text-text-muted hover:text-white uppercase tracking-widest transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm"
-          >
-            Load More Projects
-          </button>
-        </div>
-      )}
+
     </div>
   );
 }
