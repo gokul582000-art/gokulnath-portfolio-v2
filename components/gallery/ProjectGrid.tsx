@@ -15,7 +15,6 @@ interface ProjectCardData {
 interface ProjectGridProps {
   projects: ProjectCardData[];
   basePath: string; // "/design" or "/photography"
-  maxInitialItems?: number;
 }
 
 function ThumbnailMedia({ src, title, priority }: { src: string; title: string; priority?: boolean }) {
@@ -67,7 +66,7 @@ function ThumbnailMedia({ src, title, priority }: { src: string; title: string; 
   );
 }
 
-export function ProjectGrid({ projects, basePath, maxInitialItems }: ProjectGridProps) {
+export function ProjectGrid({ projects, basePath }: ProjectGridProps) {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
