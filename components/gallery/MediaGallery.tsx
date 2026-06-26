@@ -41,7 +41,7 @@ function MediaCard({ item, onClick }: { item: MediaItem; onClick: () => void }) 
     return (
       <div
         ref={containerRef}
-        className="relative w-full cursor-pointer group"
+        className="relative block w-full cursor-pointer group"
         onClick={onClick}
       >
         <video
@@ -50,8 +50,8 @@ function MediaCard({ item, onClick }: { item: MediaItem; onClick: () => void }) 
           muted
           loop
           playsInline
-          preload="metadata"
-          className="w-full h-auto rounded-lg transition-transform duration-300 group-hover:scale-[1.01]"
+          preload="none"
+          className="block w-full h-auto rounded-lg transition-transform duration-300 group-hover:scale-[1.01]"
         />
         {/* Play icon overlay */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -68,7 +68,7 @@ function MediaCard({ item, onClick }: { item: MediaItem; onClick: () => void }) 
   // Images and GIFs — use native img to preserve GIF animation
   return (
     <div
-      className="relative w-full cursor-pointer group"
+      className="relative block w-full cursor-pointer group"
       onClick={onClick}
     >
       <Image
@@ -76,9 +76,9 @@ function MediaCard({ item, onClick }: { item: MediaItem; onClick: () => void }) 
         alt=""
         width={0}
         height={0}
-        sizes="100vw"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         style={{ width: '100%', height: 'auto' }}
-        className="rounded-lg transition-transform duration-300 group-hover:scale-[1.01]"
+        className="block rounded-lg transition-transform duration-300 group-hover:scale-[1.01]"
         unoptimized={item.type === 'gif'}
       />
       <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
@@ -117,7 +117,7 @@ export function MediaGallery({ media, layout = "default" }: MediaGalleryProps) {
             <div key={`${item.src}-${i}`} className={clsx(
               "w-full",
               layout === "hotmale" ? itemClass : "",
-              (layout === "masonry" || layout === "default") ? "break-inside-avoid mb-4 md:mb-6" : ""
+              (layout === "masonry" || layout === "default") ? "block w-full break-inside-avoid mb-4 md:mb-6" : ""
             )}>
               <MediaCard
                 item={item}

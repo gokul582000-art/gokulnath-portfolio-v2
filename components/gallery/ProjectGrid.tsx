@@ -49,7 +49,7 @@ function ThumbnailMedia({ src, title, priority }: { src: string; title: string; 
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
     );

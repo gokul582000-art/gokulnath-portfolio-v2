@@ -4,6 +4,7 @@
 
 import { useEffect, useMemo, useRef, useCallback, useState } from 'react';
 import { useGesture } from '@use-gesture/react';
+import Image from 'next/image';
 import { photographyProjects } from '@/lib/data/photography-projects';
 import { designProjects } from '@/lib/data/design-projects';
 import './DomeGallery.css';
@@ -668,7 +669,7 @@ export default function DomeGallery({
                   onClick={onTileClick}
                   onPointerUp={onTilePointerUp}
                 >
-                  <img src={it.src} draggable={false} alt={it.alt} />
+                  <Image src={it.src} alt={it.alt || 'Gallery image'} fill style={{ objectFit: 'cover' }} loading="lazy" sizes="(max-width: 768px) 150px, 300px" draggable={false} />
                 </div>
               </div>
             ))}
