@@ -82,7 +82,7 @@ export function ProjectGrid({ projects, basePath, maxInitialItems }: ProjectGrid
         cards.forEach(c => c.classList.add("animated"));
       }}
     );
-  }, [visibleCount]);
+  }, [projects]);
 
   return (
     <div className="flex flex-col items-center">
